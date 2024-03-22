@@ -1,0 +1,7 @@
+RegFile.v
+PC.v
+32bit_Adder.v
+2to1MUX.v
+ImmGen.v
+InstructionMem.v
+
