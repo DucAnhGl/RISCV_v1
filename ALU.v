@@ -10,12 +10,12 @@ module ALU (
 	output reg Flag_o	
 );
 
-	parameter EQ_para	= 000,
-		  NE_para	= 001,
-	  	  LT_para	= 010,
-		  GE_para	= 011,
-		  LTU_para	= 100,
-		  GEU_para	= 101;	  
+	parameter EQ_case	= 000,
+		  NE_case	= 001,
+	  	  LT_case	= 010,
+		  GE_case	= 011,
+		  LTU_case	= 100,
+		  GEU_case	= 101;	  
 
 	reg EQ, NE, LT, GE, LTU, GEU;
 
@@ -45,13 +45,13 @@ module ALU (
 
 	always @(*) begin 
 		case (Flagsel_i)
-			EQ_para	: Flag_o = EQ;
-			NE_para	: Flag_o = NE;
-			LT_para	: Flag_o = LT;
-			GE_para	: Flag_o = GE;
-			LTU_para: Flag_o = LTU;
-			GEU_para: Flag_o = GEU;
-			default: flag_o = 1'b0;			
+			EQ_case	: Flag_o = EQ;
+			NE_case	: Flag_o = NE;
+			LT_case	: Flag_o = LT;
+			GE_case	: Flag_o = GE;
+			LTU_case: Flag_o = LTU;
+			GEU_case: Flag_o = GEU;
+			default : flag_o = 1'b0;			
 		endcase
 	end
 
