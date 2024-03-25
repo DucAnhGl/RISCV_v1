@@ -3,7 +3,7 @@ module ALU (
 	input [31:0] OperandB_i,
 
 	input [3:0] ALUCtrl_i,
-	input [2:0] Flagsel_i,	// Comes from ALU_Control block or comes from funct3 
+	input [2:0] Flagsel_i,	// Comes from Funct3 
 
 	output reg Result_o,
 	output reg Flag_o	
@@ -11,10 +11,10 @@ module ALU (
 
 	parameter EQ_case	= 000,
 		  NE_case	= 001,
-	  	  LT_case	= 010,
-		  GE_case	= 011,
-		  LTU_case	= 100,
-		  GEU_case	= 101;	  
+	  	  LT_case	= 100,
+		  GE_case	= 101,
+		  LTU_case	= 110,
+		  GEU_case	= 111;	  
 
 	reg EQ, NE, LT, GE, LTU, GEU;
 
