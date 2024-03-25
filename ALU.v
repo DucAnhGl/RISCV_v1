@@ -3,8 +3,7 @@ module ALU (
 	input [31:0] OperandB_i,
 
 	input [3:0] ALUCtrl_i,
-	input [2:0] Flagsel_i,	// Comes from ALU_Control block or comes from funct3
-       				// If comes from funct3 then: 
+	input [2:0] Flagsel_i,	// Comes from ALU_Control block or comes from funct3 
 
 	output reg Result_o,
 	output reg Flag_o	
