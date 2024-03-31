@@ -5,7 +5,7 @@ module ALU (
 	input [3:0] ALUCtrl_i,
 	input [2:0] Flagsel_i,	// Comes from Funct3 
 
-	output reg Result_o,
+	output reg [31:0] Result_o,
 	output reg Flag_o	
 );
 
@@ -50,7 +50,7 @@ module ALU (
 			GE_case	: Flag_o = GE;
 			LTU_case: Flag_o = LTU;
 			GEU_case: Flag_o = GEU;
-			default : flag_o = 1'b0;			
+			default : Flag_o = 1'b0;			
 		endcase
 	end
 

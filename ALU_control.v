@@ -7,7 +7,7 @@ module ALU_control (
 );
 
 	always @(*) begin
-		case (AlUOp_i)
+		case (ALUOp_i)
 			2'b00: begin
 				     if ( (Funct3_i==3'b000) && (Funct7_i==7'b0000000) ) ALUCtrl_o = 4'b0000; // Add
 				else if ( (Funct3_i==3'b000) && (Funct7_i==7'b0100000) ) ALUCtrl_o = 4'b0001; // Sub

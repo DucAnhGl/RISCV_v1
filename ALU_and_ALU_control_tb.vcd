@@ -1,0 +1,279 @@
+$date
+	Wed Mar 27 15:39:59 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module ALU_and_ALU_control_tb $end
+$var wire 32 ! Result_o [31:0] $end
+$var wire 1 " Flag_o $end
+$var reg 2 # ALUOp_i [1:0] $end
+$var reg 3 $ Funct3_i [2:0] $end
+$var reg 7 % Funct7_i [6:0] $end
+$var reg 32 & OperandA_i [31:0] $end
+$var reg 32 ' OperandB_i [31:0] $end
+$scope module dut $end
+$var wire 2 ( ALUOp_i [1:0] $end
+$var wire 3 ) Funct3_i [2:0] $end
+$var wire 7 * Funct7_i [6:0] $end
+$var wire 32 + OperandA_i [31:0] $end
+$var wire 32 , OperandB_i [31:0] $end
+$var wire 32 - Result_o [31:0] $end
+$var wire 1 " Flag_o $end
+$var wire 4 . ALUCtrl_wire [3:0] $end
+$scope module ALU_control_dut $end
+$var wire 2 / ALUOp_i [1:0] $end
+$var wire 3 0 Funct3_i [2:0] $end
+$var wire 7 1 Funct7_i [6:0] $end
+$var reg 4 2 ALUCtrl_o [3:0] $end
+$upscope $end
+$scope module ALU_dut $end
+$var wire 4 3 ALUCtrl_i [3:0] $end
+$var wire 3 4 Flagsel_i [2:0] $end
+$var wire 32 5 OperandA_i [31:0] $end
+$var wire 32 6 OperandB_i [31:0] $end
+$var parameter 32 7 EQ_case $end
+$var parameter 32 8 GEU_case $end
+$var parameter 32 9 GE_case $end
+$var parameter 32 : LTU_case $end
+$var parameter 32 ; LT_case $end
+$var parameter 32 < NE_case $end
+$var reg 1 = EQ $end
+$var reg 1 " Flag_o $end
+$var reg 1 > GE $end
+$var reg 1 ? GEU $end
+$var reg 1 @ LT $end
+$var reg 1 A LTU $end
+$var reg 1 B NE $end
+$var reg 32 C Result_o [31:0] $end
+$upscope $end
+$upscope $end
+$scope task display $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+b1 <
+b1100100 ;
+b1101110 :
+b1100101 9
+b1101111 8
+b0 7
+$end
+#0
+$dumpvars
+b110010 C
+xB
+xA
+x@
+x?
+x>
+x=
+b11110 6
+b10100 5
+b0 4
+b0 3
+b0 2
+b0 1
+b0 0
+b0 /
+b0 .
+b110010 -
+b11110 ,
+b10100 +
+b0 *
+b0 )
+b0 (
+b11110 '
+b10100 &
+b0 %
+b0 $
+b0 #
+x"
+b110010 !
+$end
+#20
+0"
+0?
+1A
+0>
+1@
+1B
+0=
+b11111111111111111111111111110110 !
+b11111111111111111111111111110110 -
+b11111111111111111111111111110110 C
+b1 .
+b1 2
+b1 3
+b100000 %
+b100000 *
+b100000 1
+#40
+b10 .
+b10 2
+b10 3
+1"
+1?
+0A
+1>
+0@
+b10100 !
+b10100 -
+b10100 C
+b0 %
+b0 *
+b0 1
+b1 $
+b1 )
+b1 0
+b1 4
+b10 '
+b10 ,
+b10 6
+b101 &
+b101 +
+b101 5
+#60
+b11 .
+b11 2
+b11 3
+0"
+b110 !
+b110 -
+b110 C
+b100 $
+b100 )
+b100 0
+b100 4
+b101 '
+b101 ,
+b101 6
+b11 &
+b11 +
+b11 5
+#80
+b100 .
+b100 2
+b100 3
+b101 !
+b101 -
+b101 C
+b101 $
+b101 )
+b101 0
+b101 4
+b10 '
+b10 ,
+b10 6
+b10100 &
+b10100 +
+b10100 5
+#100
+b101 .
+b101 2
+b101 3
+b111111111111111111111111111011 !
+b111111111111111111111111111011 -
+b111111111111111111111111111011 C
+b100000 %
+b100000 *
+b100000 1
+b11111111111111111111111111101100 &
+b11111111111111111111111111101100 +
+b11111111111111111111111111101100 5
+#120
+b110 .
+b110 2
+b110 3
+b1101 !
+b1101 -
+b1101 C
+b0 %
+b0 *
+b0 1
+b110 $
+b110 )
+b110 0
+b110 4
+b101 '
+b101 ,
+b101 6
+b1000 &
+b1000 +
+b1000 5
+#140
+b0 !
+b0 -
+b0 C
+b111 .
+b111 2
+b111 3
+b111 $
+b111 )
+b111 0
+b111 4
+#160
+b0 .
+b0 2
+b0 3
+b110010 !
+b110010 -
+b110010 C
+b1 #
+b1 (
+b1 /
+b0 $
+b0 )
+b0 0
+b0 4
+b11110 '
+b11110 ,
+b11110 6
+b10100 &
+b10100 +
+b10100 5
+#180
+1"
+0B
+1=
+b1 .
+b1 2
+b1 3
+b0 !
+b0 -
+b0 C
+b10 #
+b10 (
+b10 /
+b10100 '
+b10100 ,
+b10100 6
+#220
+b1000 .
+b1000 2
+b1000 3
+0"
+1B
+0=
+b101000000000000 !
+b101000000000000 -
+b101000000000000 C
+b11 #
+b11 (
+b11 /
+b100 $
+b100 )
+b100 0
+b100 4
+b101 '
+b101 ,
+b101 6
+b11110 &
+b11110 +
+b11110 5
+#240
