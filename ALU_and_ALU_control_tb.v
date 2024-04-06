@@ -34,7 +34,7 @@ module ALU_and_ALU_control_tb;
 		#20;
 		display;
 
-		OperandA_i=20; OperandB_i=30; Funct3_i=3'b000; Funct7_i=7'b0100000; ALUOp_i=2'b00; // Sub
+		OperandA_i=20; OperandB_i=-30; Funct3_i=3'b000; Funct7_i=7'b0100000; ALUOp_i=2'b00; // Sub
 		#20;
 		display;
 
@@ -76,7 +76,7 @@ module ALU_and_ALU_control_tb;
 		#20;
 		display;
 
-		OperandA_i=20; OperandB_i=20; Funct3_i=3'b000; Funct7_i=7'b0000000; ALUOp_i=2'b10; // BEQ (Condition false case) 
+		OperandA_i=30; OperandB_i=20; Funct3_i=3'b000; Funct7_i=7'b0000000; ALUOp_i=2'b10; // BEQ (Condition false case) 
 		#20;
 		display;
 

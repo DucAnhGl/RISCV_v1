@@ -31,9 +31,9 @@ module ALU (
 				GEU	 = (OperandA_i >= OperandB_i) ? 1'b1 : 1'b0;
 			end
 			4'b0010: Result_o = OperandA_i	<<	OperandB_i;
-		       	4'b0011: Result_o = OperandA_i	^	OperandB_i;
+		    4'b0011: Result_o = OperandA_i	^	OperandB_i;
 			4'b0100: Result_o = OperandA_i	>>	OperandB_i;
-			4'b0101: Result_o = OperandA_i	>>>	OperandB_i;
+			4'b0101: Result_o = $signed(OperandA_i)	>>>	OperandB_i;
 			4'b0110: Result_o = OperandA_i	|	OperandB_i;
 			4'b0111: Result_o = OperandA_i	&	OperandB_i;
 			4'b1000: Result_o = OperandB_i	<<	12;
