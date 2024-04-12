@@ -1,4 +1,5 @@
 module RegFile (
+    input clk,
 	input [4:0] ReadReg1,
 	input [4:0] ReadReg2,
 	input [4:0] WriteReg,
@@ -10,13 +11,14 @@ module RegFile (
 
 reg [31:0] Registers[32];
 
-always @(RegWrite) begin
+// Write on posedge clk, read on negedge clk to avoid data hazards.
+always @((posedge clk) and RegWrite) begin
 	Registers[WriteReg] <= WriteData;
 end
 
-
-assign ReadData1 = Registers[ReadReg1];
-assign ReadData2 = Registers[ReadReg2];
-
+always@(negedge clk) begin 
+    ReadData1 <= Registers[ReadReg1];
+    ReadData2 <= Registers[ReadReg2];
+end
 
 endmodule
