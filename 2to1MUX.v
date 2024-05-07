@@ -8,7 +8,7 @@ module 2to1MUX (
 always @(*) begin
 	case (sel):
 		1'b0	: Out_o = A_i;
-		1'b0	: Out_o = B_i;
+		1'b1	: Out_o = B_i;
 		Default : Out_o = 32'h00000000;
 	endcase	
 end

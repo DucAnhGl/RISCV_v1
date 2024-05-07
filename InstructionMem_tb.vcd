@@ -1,5 +1,5 @@
 $date
-	Fri Apr 12 10:19:43 2024
+	Mon Apr 15 21:24:13 2024
 $end
 $version
 	Icarus Verilog
@@ -16,9 +16,6 @@ $var reg 32 $ Instruction_o [31:0] $end
 $upscope $end
 $upscope $end
 $enddefinitions $end
-$comment Show the parameter values. $end
-$dumpall
-$end
 #0
 $dumpvars
 b11101110001100111110111000110011 $
