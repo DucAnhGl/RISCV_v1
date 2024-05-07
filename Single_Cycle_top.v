@@ -12,14 +12,19 @@ module Single_Cycle_top (
     input clk
     );
 
-    wire [31:0] CurrentPC, NextPC, PCplus4, AddrCal, Instruction, Imm, WriteData, ReadData1, ReadData2, MemOrALU, AddCalSrc;  
-    wire PCMUXSel;
-    wire RegWrEn, PCtoReg;
+    wire [31:0] CurrentPC, NextPC, PCplus4, AddrCal, Instruction, Imm, WriteData, ReadData1, ReadData2, MemOrALU, AddCalSrc, OprB, ALUOut, DataMemOut;  
+    wire PCMUXSel, ALUFlag;
+    wire RegWrEn, PCtoReg, OffsetBase, ALUOp, ALUSrc, MemRdEn, MemWrEn, MemtoReg, BrEn, UncBr; //Control lines
+
     wire [4:0] Rs1, Rs2, Rd;
+    wire [6:0] func7;
+    wire [2:0] func3;
 
     assign Rd = Instruction[11:7];
     assign Rs1 = Instruction[19:15];
     assign Rs2 = Instruction[24:20];
+    assign func7 = Instruction[31:25];
+    assign func3 = Instruction[14:12];
 
     PC PC1 (
         .clk (clk),
@@ -65,7 +70,7 @@ module Single_Cycle_top (
         .A_i (MemOrALU),
         .B_i (PCplus4),
         .sel (PCtoReg),
-        .Out_o (writeData)
+        .Out_o (WriteData)
    );
 
    32bit_Adder AddrCalAdder (
@@ -73,6 +78,48 @@ module Single_Cycle_top (
         .B_i (Imm),
         .Sum_o (AddrCal)
    );
-   
+
+   2to1MUX AddrCalSrcMUX (
+       .A_i (CurrentPC),
+       .B_i (ReadData1),
+       .sel (OffsetBase),
+       .Out_o (AddrCalSrc)
+   );
+
+   AlU_and_ALU_control ALU_and_ALU_Control_main (
+       .OperandA_i (ReadData1),
+       .OperandB_i (OprB),
+       .Funct7_i (func7),
+       .Funct3_i (func3),
+       .ALUOp_i (ALUOp),
+       .Result_o (ALUOut),
+       .Flag_o (ALUFlag)
+   );
+
+   2to1MUX OperandBMUX (
+       .A_i (ReadData2),
+       .b_i (Imm),
+       .sel (ALUSrc),
+       .Out_o (OprB)
+   );
+
+   DataMem DataMemory (
+        .clk (clk),
+        .Address_i (ALUOut),
+        .WriteData_i (ReadData2),
+        .ReadEn_i (MemRdEn),
+        .WriteEn_i (MemWrEn),
+        .Data_o (DataMemOut)
+   );
+
+   2to1MUX MemtoRegMUX (
+        .A_i (ALUOut),
+        .B_i (DataMemOut),
+        .sel (MemtoReg),
+        .Out_o (MemOrALU)
+   );
+
+   assign PCMUXSel = (ALUFlag & BrEn) | UncBr;
+
 
 endmodule

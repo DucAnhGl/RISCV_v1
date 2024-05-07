@@ -5,7 +5,7 @@
 
 module ALU_and_ALU_control (
 	input [31:0] OperandA_i,
-       	input [31:0] OperandB_i,
+    input [31:0] OperandB_i,
 	input [6:0] Funct7_i,
 	input [2:0] Funct3_i,
 	input [1:0] ALUOp_i,
