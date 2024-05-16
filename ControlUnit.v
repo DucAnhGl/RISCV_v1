@@ -38,7 +38,7 @@ module ControlUnit (
                ALUOp_o = 2'b10; ALUSrc_o = 1'b0; OffsetBase_o = 1'b0; BrEn_o = 1'b1; UncBr_o = 1'b0; MemWrEn_o = 1'b0; MemRdEn_o = 1'b0; MemtoReg_o = 1'bx; RegWrEn_o = 1'b0; PCtoReg_o = 1'bx;
             end
             
-            lui: begin
+            Lui: begin
                ALUOp_o = 2'b11; ALUSrc_o = 1'b1; OffsetBase_o = 1'bx; BrEn_o = 1'b0; UncBr_o = 1'b0; MemWrEn_o = 1'b0; MemRdEn_o = 1'b0; MemtoReg_o = 1'b0; RegWrEn_o = 1'b1; PCtoReg_o = 1'b0;
             end
 

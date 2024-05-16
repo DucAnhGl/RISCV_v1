@@ -1,0 +1,141 @@
+$date
+	Sun May 12 10:38:55 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ns
+$end
+$scope module PC_and_InstrMem_tb $end
+$var wire 32 ! Instruction [31:0] $end
+$var reg 1 " clk $end
+$var reg 1 # rst $end
+$scope module dut $end
+$var wire 1 " clk $end
+$var wire 1 # rst $end
+$var wire 32 $ NextPC [31:0] $end
+$var wire 32 % Instruction [31:0] $end
+$var wire 32 & CurrentPC [31:0] $end
+$scope module InstrMem $end
+$var wire 32 ' PC_i [31:0] $end
+$var reg 32 ( Instruction_o [31:0] $end
+$upscope $end
+$scope module PC1 $end
+$var wire 1 " clk $end
+$var wire 1 # rst $end
+$var wire 32 ) NextAddr [31:0] $end
+$var reg 32 * CurrentAddr [31:0] $end
+$upscope $end
+$scope module PCAdder $end
+$var wire 32 + A_i [31:0] $end
+$var wire 32 , B_i [31:0] $end
+$var wire 32 - Sum_o [31:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx -
+bx ,
+b100 +
+bx *
+bx )
+bx (
+bx '
+bx &
+bx %
+bx $
+1#
+0"
+bx !
+$end
+#5
+b10100001000000010010011 !
+b10100001000000010010011 %
+b10100001000000010010011 (
+b100 $
+b100 )
+b100 -
+b0 &
+b0 '
+b0 *
+b0 ,
+1"
+#10
+0"
+#15
+b11000010000000100010011 !
+b11000010000000100010011 %
+b11000010000000100010011 (
+b1000 $
+b1000 )
+b1000 -
+b100 &
+b100 '
+b100 *
+b100 ,
+1"
+0#
+#20
+0"
+#25
+b1000001000000110110011 !
+b1000001000000110110011 %
+b1000001000000110110011 (
+b1100 $
+b1100 )
+b1100 -
+b1000 &
+b1000 '
+b1000 *
+b1000 ,
+1"
+#30
+0"
+#35
+bx !
+bx %
+bx (
+b10000 $
+b10000 )
+b10000 -
+b1100 &
+b1100 '
+b1100 *
+b1100 ,
+1"
+#40
+0"
+#45
+b10100 $
+b10100 )
+b10100 -
+b10000 &
+b10000 '
+b10000 *
+b10000 ,
+1"
+#50
+0"
+#55
+b11000 $
+b11000 )
+b11000 -
+b10100 &
+b10100 '
+b10100 *
+b10100 ,
+1"
+#60
+0"
+#65
+b11100 $
+b11100 )
+b11100 -
+b11000 &
+b11000 '
+b11000 *
+b11000 ,
+1"

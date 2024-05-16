@@ -6,15 +6,16 @@
 `include "ImmGen.v"
 `include "InstructionMem.v"
 `include "PC.v"
-`include "RegFile.v"
+`include "SC_RegFile.v"
 
 module Single_Cycle_top (
-    input clk
+    input clk, rst
     );
 
-    wire [31:0] CurrentPC, NextPC, PCplus4, AddrCal, Instruction, Imm, WriteData, ReadData1, ReadData2, MemOrALU, AddCalSrc, OprB, ALUOut, DataMemOut;  
+    wire [31:0] CurrentPC, NextPC, PCplus4, AddrCal, Instruction, Imm, WriteData, ReadData1, ReadData2, MemOrALU, AddrCalSrc, OprB, ALUOut, DataMemOut;  
     wire PCMUXSel, ALUFlag;
-    wire RegWrEn, PCtoReg, OffsetBase, ALUOp, ALUSrc, MemRdEn, MemWrEn, MemtoReg, BrEn, UncBr; //Control lines
+    wire RegWrEn, PCtoReg, OffsetBase, ALUSrc, MemRdEn, MemWrEn, MemtoReg, BrEn, UncBr; //Control lines
+    wire [1:0] ALUOp;
 
     wire [4:0] Rs1, Rs2, Rd;
     wire [6:0] func7;
@@ -27,19 +28,20 @@ module Single_Cycle_top (
     assign func3 = Instruction[14:12];
 
     PC PC1 (
+        .rst (rst),
         .clk (clk),
         .CurrentAddr (CurrentPC),
         .NextAddr (NextPC)
     );
 
-    2to1MUX PCMUX (
+    MUX2to1 PCMUX (
         .A_i (PCplus4),
         .B_i (AddrCal),
         .sel (PCMUXSel),
         .Out_o (NextPC)
     );
 
-    32bit_Adder PCInc (
+    Adder_32bit PCInc (
         .A_i (32'd4),
         .B_i (CurrentPC),
         .Sum_o (PCplus4)
@@ -55,8 +57,9 @@ module Single_Cycle_top (
         .Immediate_o (Imm)
     );
 
-   RegFile RegisterFile (
+   SC_RegFile RegisterFile (
         .clk (clk),
+        .rst (rst),
         .ReadReg1 (Rs1),
         .ReadReg2 (Rs2),
         .WriteReg (Rd),
@@ -66,27 +69,27 @@ module Single_Cycle_top (
         .ReadData2 (ReadData2)
    );
 
-   2to1MUX WriteDataMUX (
+   MUX2to1 WriteDataMUX (
         .A_i (MemOrALU),
         .B_i (PCplus4),
         .sel (PCtoReg),
         .Out_o (WriteData)
    );
 
-   32bit_Adder AddrCalAdder (
+   Adder_32bit AddrCalAdder (
         .A_i (AddrCalSrc),
         .B_i (Imm),
         .Sum_o (AddrCal)
    );
 
-   2to1MUX AddrCalSrcMUX (
+   MUX2to1 AddrCalSrcMUX (
        .A_i (CurrentPC),
        .B_i (ReadData1),
        .sel (OffsetBase),
        .Out_o (AddrCalSrc)
    );
 
-   AlU_and_ALU_control ALU_and_ALU_Control_main (
+   ALU_and_ALU_control ALU_and_ALU_Control_main (
        .OperandA_i (ReadData1),
        .OperandB_i (OprB),
        .Funct7_i (func7),
@@ -96,9 +99,9 @@ module Single_Cycle_top (
        .Flag_o (ALUFlag)
    );
 
-   2to1MUX OperandBMUX (
+   MUX2to1 OperandBMUX (
        .A_i (ReadData2),
-       .b_i (Imm),
+       .B_i (Imm),
        .sel (ALUSrc),
        .Out_o (OprB)
    );
@@ -112,7 +115,7 @@ module Single_Cycle_top (
         .Data_o (DataMemOut)
    );
 
-   2to1MUX MemtoRegMUX (
+   MUX2to1 MemtoRegMUX (
         .A_i (ALUOut),
         .B_i (DataMemOut),
         .sel (MemtoReg),
@@ -120,6 +123,20 @@ module Single_Cycle_top (
    );
 
    assign PCMUXSel = (ALUFlag & BrEn) | UncBr;
+
+   ControlUnit Controlunit (
+        .Instruction_i (Instruction),
+        .ALUSrc_o (ALUSrc),
+        .OffsetBase_o (OffsetBase),
+        .BrEn_o (BrEn),
+        .UncBr_o (UncBr),
+        .MemWrEn_o (MemWrEn),
+        .MemRdEn_o (MemRdEn),
+        .MemtoReg_o (MemtoReg),
+        .RegWrEn_o (RegWrEn),
+        .PCtoReg_o (PCtoReg),
+        .ALUOp_o (ALUOp)
+   );
 
 
 endmodule

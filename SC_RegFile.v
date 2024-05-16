@@ -1,4 +1,4 @@
-module RegFile (
+module SC_RegFile (
     input clk,
     input rst,
 	input [4:0] ReadReg1,
@@ -59,7 +59,7 @@ assign Reg_out_31 = Registers[31];
 
 
 // Write on posedge clk, read on negedge clk to avoid data hazards.
-always @(posedge clk) begin
+always @(negedge clk or posedge rst) begin
     if (rst) begin
         Registers[0] <= 32'd0;
         Registers[1] <= 32'd0;
@@ -93,14 +93,13 @@ always @(posedge clk) begin
         Registers[29] <= 32'd0;
         Registers[30] <= 32'd0;
         Registers[31] <= 32'd0;
-
     end
-	else  Registers[WriteReg] <= WriteData;
+	if (RegWrEn) Registers[WriteReg] <= WriteData;
 end
 
-always@(negedge clk) begin 
-    ReadData1 <= Registers[ReadReg1];
-    ReadData2 <= Registers[ReadReg2];
+always@(*) begin 
+    ReadData1 = Registers[ReadReg1];
+    ReadData2 = Registers[ReadReg2];
 end
 
 endmodule

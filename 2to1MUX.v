@@ -1,4 +1,4 @@
-module 2to1MUX (
+module MUX2to1 (
 	input [31:0] A_i,
 	input [31:0] B_i,
 	input sel,
@@ -6,10 +6,10 @@ module 2to1MUX (
 );
 
 always @(*) begin
-	case (sel):
+	case (sel)
 		1'b0	: Out_o = A_i;
 		1'b1	: Out_o = B_i;
-		Default : Out_o = 32'h00000000;
+		default : Out_o = 32'h00000000;
 	endcase	
 end
 
