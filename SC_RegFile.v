@@ -59,7 +59,7 @@ assign Reg_out_31 = Registers[31];
 
 
 // Write on posedge clk, read on negedge clk to avoid data hazards.
-always @(negedge clk or posedge rst) begin
+always @(posedge clk or posedge rst) begin
     if (rst) begin
         Registers[0] <= 32'd0;
         Registers[1] <= 32'd0;
